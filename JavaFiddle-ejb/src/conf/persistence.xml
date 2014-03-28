@@ -3,7 +3,13 @@
   <persistence-unit name="JavaFiddlePU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>JavaFiddleDS</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>com.javafiddle.core.jpa.LocalIdGenerator</class>
+    <class>com.javafiddle.core.jpa.Project</class>
+    <class>com.javafiddle.core.jpa.Revision</class>
+    <class>com.javafiddle.core.jpa.User</class>
+    <class>com.javafiddle.core.jpa.UserAccount</class>
+    <class>com.javafiddle.core.jpa.UserProfile</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>

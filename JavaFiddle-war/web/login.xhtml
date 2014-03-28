@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
 
-    <head>
+    <h:head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,9 +12,9 @@
         <meta name="author" content=""/>
         <title>Fiddle log in</title>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
-    </head>
+    </h:head>
 
-    <body>
+    <h:body>
 
         <div class="container">
 
@@ -38,17 +41,21 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-xs-4">
-                                                <label for="InputUsername" class="">Your username: </label>
-                                                <input type="email" class="form-control" id="InputUsername" placeholder="Enter username" />     
-                                                <label for="InputPassword" class="">Your e-mail:</label>
-                                                <input type="email" class="form-control" id="InputPassword" placeholder="Enter e-mail" />
-                                                <label for="InputPassword" class="">Your password:</label>
-                                                <input type="password" class="form-control" id="InputPassword" placeholder="Enter password" />
-                                                <label for="InputPassword" class="">Repeat your password:</label>
-                                                <input type="password" class="form-control" id="InputPassword" placeholder="Enter password" />
-                                                <p></p>
-                                                <button class="btn btn-primary" data-dismiss="modal">Register</button>
+                                            <div class="col-xs-4"> 
+                                                <h:form prependId="false">
+                                                    <h:messages errorClass="alert alert-danger" id="registerErrors"> </h:messages>
+                                                    <h:outputLabel class="">Your username:</h:outputLabel>
+                                                    <h:inputText styleClass ="form-control" value="#{registrationBean.nickname}"/>     
+                                                    <h:outputLabel class="">Your e-mail:</h:outputLabel>
+                                                    <h:inputText styleClass ="form-control" value="#{registrationBean.email}"/>
+                                                    <h:outputLabel class="">Your password:</h:outputLabel>
+                                                    <h:inputSecret  styleClass ="form-control" value="#{registrationBean.password}"/>
+                                                    <h:outputLabel value="Repeat your password:" class=""/>
+                                                    <h:inputSecret styleClass ="form-control" value="#{registrationBean.repeatPassword}" />
+                                                    <h:commandLink value="Register" styleClass="btn btn-primary">
+                                                        <f:ajax execute="@form" render="@form" onevent="registerListener" listener="#{registrationBean.addNewUser}" />
+                                                    </h:commandLink>                                                
+                                                </h:form>  
                                             </div>
                                         </div>
                                     </div>
@@ -63,5 +70,6 @@
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="resources/js/bootstrap.min.js"></script>
-    </body>
+        <script src="resources/js/registerPage.js"></script>
+    </h:body>
 </html>
