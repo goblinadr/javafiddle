@@ -47,13 +47,13 @@ public class RegistrationBean {
             context.addMessage("registerErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password field is not filled", "Some field input failed"));
             error = true;
         }
-        if (this.password.equals(this.repeatPassword)){
+        if (!error && this.password.equals(this.repeatPassword)){
             user = ejbRegistrationBean.addNewUser(this.nickname, this.password, this.email);
             if (user == null) 
                 context.addMessage("registerErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, ejbRegistrationBean.getMessage(), ejbRegistrationBean.getMessage()));
 
         }
-        else    
+        else  if (!this.password.equals(this.repeatPassword))  
             context.addMessage("registerErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords are not equal", "Some field input failed"));
     
         //System.out.println("ADD NEW USER");
