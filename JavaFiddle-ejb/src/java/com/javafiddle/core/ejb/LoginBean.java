@@ -8,6 +8,7 @@ package com.javafiddle.core.ejb;
 
 import com.javafiddle.core.jpa.User;
 import java.util.List;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +17,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author vitaly
  */
-@Stateless
+@Stateful
 public class LoginBean implements LoginBeanLocal {
     @PersistenceContext
     private EntityManager em;

@@ -8,21 +8,21 @@ package com.javafiddle.web.beans;
 import com.javafiddle.core.ejb.LoginBeanLocal;
 import com.javafiddle.core.jpa.User;
 import java.io.Serializable;
-import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
  *
  * @author vitaly
  */
-@Named(value = "LoginBean")
+@Named
 @SessionScoped
 public class LoginBean implements Serializable{
-    @EJB
+    @Inject
     private LoginBeanLocal ejbLoginBean;
     /**
      * Creates a new instance of LoginBean
@@ -34,8 +34,25 @@ public class LoginBean implements Serializable{
     public LoginBean() {
     }
     
-    public void login(String nickname, String password){
-        this.user = ejbLoginBean.performLogin(nickname, password);
+    public void login(){
+        boolean error = false;
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (this.nickname.isEmpty() || this.password.isEmpty()){
+            context.addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Some field is empty", "Some field input failed"));
+            error = true;           
+        }                
+        if (!error){
+            this.user = ejbLoginBean.performLogin(nickname, password);
+            if (this.user != null){               
+              FacesContext fc = FacesContext.getCurrentInstance();
+  NavigationHandler nh = fc.getApplication().getNavigationHandler();
+  nh.handleNavigation(fc, null, "index");   
+            //context.addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "GOOOD", "good"));
+            }
+            else    context.addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "incorrect username or password", "incorrect username or password"));
+
+
+        }
     }
 
     public String getNickname() {

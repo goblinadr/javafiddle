@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -23,7 +24,7 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class RegistrationBean {
-    @EJB
+    @Inject
     private RegistrationBeanLocal ejbRegistrationBean;
    
     private User user;
