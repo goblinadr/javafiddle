@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Fiddle profile</title>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resources/css/tree_profile.css" rel="stylesheet"/>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h1>Java Fiddle <span class="label label-info">Profile</span></h1>
+            <br/>
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbar-1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Create</a></li>
+                                    <li><a href="#">Share</a></li>
+                                    <li><a href="#">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="tree well">
+                        <ul>
+                            <li>
+                                <span><i class="glyphicon glyphicon-folder-open"></i>  First project</span> <a href="">Link</a>
+                                <ul>
+                                    <li>
+                                        <span><i class="glyphicon glyphicon-folder-open"></i>  Folder</span>
+                                        <ul>
+                                            <li>
+                                                <span><i class="glyphicon glyphicon-list-alt"></i>  main.cpp</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <span><i class="glyphicon glyphicon-folder-open"></i>  Java Fiddle</span> <a href="">Link</a>
+                                <ul>
+                                    <li>
+                                        <span><i class="glyphicon glyphicon-folder-open"></i>  Web pages</span>
+                                        <ul>
+                                            <li>
+                                                <span><i class="glyphicon glyphicon-list-alt"></i>  login.xhtml</span>
+                                            </li>
+                                            <li>
+                                                <span><i class="glyphicon glyphicon-list-alt"></i>  profile.xhtml</span>
+                                            </li>
+                                            <li>
+                                                <span><i class="glyphicon glyphicon-folder-open"></i>  css</span>
+                                                <ul>
+                                                    <li>
+                                                        <span><i class="glyphicon glyphicon-list-alt"></i>  tree.css</span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-xs-7">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <img src="resources/img/ava_example.jpg" alt="Avatar" class="img-rounded"/>
+                                </div>
+                                <div class="col-xs-8">
+                                    <b>Username:</b> Vadim <br/>
+                                    <b>Projects:</b> 2 <br/>
+                                    <b>Files:</b> 4 <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Files</th>
+                                <th>Shared for</th>
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First project</td>
+                                <td>everyone</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
+        <script src="resources/js/tree.js"></script>
+    </body>
+</html>
