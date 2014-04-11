@@ -7,6 +7,8 @@
 package com.javafiddle.core.ejb;
 
 import com.javafiddle.core.jpa.User;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
@@ -23,6 +25,32 @@ public class LoginBean implements LoginBeanLocal {
     private EntityManager em;
 
     private String message;
+    public String getHash(String str) {
+        
+        MessageDigest md5 ;        
+        StringBuffer  hexString = new StringBuffer();
+        
+        try {
+                                    
+            md5 = MessageDigest.getInstance("md5");
+            
+            md5.reset();
+            md5.update(str.getBytes()); 
+                        
+                        
+            byte messageDigest[] = md5.digest();
+                        
+            for (int i = 0; i < messageDigest.length; i++) {
+                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            }
+                                                                                        
+        } 
+        catch (NoSuchAlgorithmException e) {                        
+            return e.toString();
+        }
+        
+        return hexString.toString();
+    }
     private boolean tryLogin(String nickname, String pwd) {
        User currentUser = null;
        Long userId = null;
@@ -47,7 +75,7 @@ public class LoginBean implements LoginBeanLocal {
        }
        user = users.get(0);
      
-       String pwd = password;
+       String pwd = getHash(password);
        password = null;       
         if(!tryLogin(nickname, pwd)) {
             return null;
