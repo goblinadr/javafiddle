@@ -6,6 +6,7 @@
 
 package com.javafiddle.core.ejb;
 
+import com.javafiddle.core.jpa.Files;
 import com.javafiddle.core.jpa.User;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -65,8 +66,8 @@ public class LoginBean implements LoginBeanLocal {
     }
 
     @Override
-    public User performLogin(String nickname, String password) {
-         User user = null;
+    public User performLogin(String nickname, String password) {       
+        User user = null;
          List<User> users = em.createQuery("select u from User u where u.nickname =:nickname")
                     .setParameter("nickname", nickname).getResultList();
        if(users == null || users.size() != 1){
