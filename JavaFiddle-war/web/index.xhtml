@@ -40,9 +40,11 @@
                             <li class="dropdown">
                                 <a id="dropdown-project" class="dropdown-toggle" data-toggle="dropdown" href="#">Project</a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-project">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick='$("#modal-newmvnproj").modal("show");'>New Maven Project</a></li>
+                                    <li role="presentation" class="divider"></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="saveFile();">Save</a></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="saveAllFiles();">Save All</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="saveProject();">Commit</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="saveProject();">Save Project</a></li>
                                     <li role="presentation" class="divider"></li>
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="closeProject();">Close Project</a></li>
                                 </ul>
@@ -260,6 +262,53 @@
                 </div>
             </div>
         </div>
+        
+        <!--Modal create new maven project -->
+        <div class="modal fade" id="modal-newmvnproj" tabindex="-1" role="dialog" aria-labelledby="modal-newproj-header" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Create new maven project</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="modal-newmvnproj-grid">Product id:</label>
+                        <input id="modal-newmvnproj-grid" type="text" class="form-control enter-active" placeholder="Input group id…"/>
+                    </div>  
+                    <div class="form-group">
+                        <label for="modal-newmvnproj-artid">Product id:</label>
+                        <input id="modal-newmvnproj-artid" type="text" class="form-control enter-active" placeholder="Input artifact id…"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-newmvnproj-version">Version:</label>
+                        <input id="modal-newmvnproj-version" type="text" class="form-control enter-active" value="1.0-SNAPSHOT"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-newmvnproj-archetype">Archetype:</label>
+                        <select id="modal-newmvnproj-archetype" class="form-control">
+                            <option value="ARCHETYPE">maven-archetype-archetype</option>
+                            <option value="J2EESIMPLE">maven-archetype-j2ee-simple</option>
+                            <option value="MOJO">maven-archetype-mojo</option>
+                            <option value="PLUGIN">maven-archetype-plugin</option>
+                            <option value="PLUGINSITE">maven-archetype-plugin-site</option>
+                            <option value="PORTLET">maven-archetype-portlet</option>
+                            <option value="QUICKSTART">maven-archetype-quickstart</option>
+                            <option value="SIMPLE">maven-archetype-simple</option>
+                            <option value="SITE">maven-archetype-site</option>
+                            <option value="SITESIMPLE">maven-archetype-site-simple</option>
+                            <option value="WEBAPP">maven-archetype-webapp</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary">Create</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
         
         <!-- Modal add new file -->
         <div class="modal fade" id="modal-newfile" tabindex="-1" role="dialog" aria-labelledby="modal-newfile-header" aria-hidden="true">
