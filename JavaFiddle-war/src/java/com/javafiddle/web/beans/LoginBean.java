@@ -8,9 +8,9 @@ package com.javafiddle.web.beans;
 import com.javafiddle.core.ejb.LoginBeanLocal;
 import com.javafiddle.core.jpa.User;
 import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,7 +40,7 @@ public class LoginBean implements Serializable{
         if (this.nickname.isEmpty() || this.password.isEmpty()){
             context.addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Some field is empty", "Some field input failed"));
             error = true;           
-        }                
+        }
         if (!error){
             this.user = ejbLoginBean.performLogin(nickname, password);
             if (this.user != null){               

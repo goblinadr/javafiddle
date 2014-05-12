@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.javafiddle.web.services.DataService.class);
         resources.add(com.javafiddle.web.services.RunService.class);
         resources.add(com.javafiddle.web.services.TreeService.class);
+        resources.add(com.javafiddle.web.tree.ProfileTreeWS.class);
     }
     
 }
