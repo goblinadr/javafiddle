@@ -30,7 +30,7 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
                 .setParameter("id", myUser.get(0)).getResultList();
         if (projs != null) {
             for (int i = 0; i < projs.size(); i++) {
-                Element pr = new Element(projs.get(i).getName(), "Project", true, projs.get(i).getFilePath());
+                Element pr = new Element(projs.get(i).getId(), projs.get(i).getName(), "Project", true, projs.get(i).getFilePath());
                 projects.add(pr);
                 getChildren(pr, projs.get(i), i, -1L);
             }
@@ -40,16 +40,18 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
         if (pers != null) {
             for (int i = 0; i < pers.size(); i++) {
                 Long fileId = pers.get(i).getId();
-                List<Files> fls = em.createQuery("select u from Files u where u.file_id =: id").setParameter("id", pers.get(i).getId()).getResultList();
-                while (!fls.get(0).getType().equals("Project")) {
-                    fls = em.createQuery("select u from Files u where u.id =: id ").setParameter("id", fls.get(0).getParent()).getResultList();
+                em.flush();
+                Files fls = em.find(Files.class, fileId);               
+                while (!fls.getType().equals("Project")) {
+                    List <Files> buf = em.createQuery("select u from Files u where u.id =: id ").setParameter("id", fls.getParent()).getResultList();
+                    fls = buf.get(0);
                 }
-                Element pr = new Element(fls.get(0).getName(), "Project", false, fls.get(0).getFilePath());
-                if (fileId == fls.get(0).getId()) {
+                Element pr = new Element(fls.getId(), fls.getName(), "Project", false, fls.getFilePath());
+                if (fileId == fls.getId()) {
                     pr.canEdit = true;
                 }
                 projects.add(pr);
-                getChildren(pr, fls.get(0), projects.size() - 1, fileId);
+                getChildren(pr, fls, projects.size() - 1, fileId);
 
             }
         }
@@ -61,11 +63,12 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
         List<Files> listOfFiles = em.createQuery("select u from Files u where u.parent =:id")
                 .setParameter("id", parentF).getResultList();
         for (int i = 0; i < listOfFiles.size(); i++) {
-            Element newEl = new Element(listOfFiles.get(i).getName(), listOfFiles.get(i).getType(), parentE.canEdit, listOfFiles.get(i).getFilePath());
+            Element newEl = new Element(listOfFiles.get(i).getId(), listOfFiles.get(i).getName(), listOfFiles.get(i).getType(), parentE.canEdit, listOfFiles.get(i).getFilePath());
             if (listOfFiles.get(i).getId() == AllowElId) {
                 newEl.canEdit = true;
             }
-            newEl.parent = parentE;
+            //newEl.parent = parentE;
+            parentE.child.add(newEl);
             if (listOfFiles.get(i).getType().equals("Folder")) {
                 getChildren(newEl, listOfFiles.get(i), numOfProject, AllowElId);
             }

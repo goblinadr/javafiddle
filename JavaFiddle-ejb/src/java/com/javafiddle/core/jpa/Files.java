@@ -37,7 +37,7 @@ public class Files implements Serializable{
     @Id
     @Column(name = "file_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long fileId;
     
     @Column(name = "name")
     private String name;
@@ -96,7 +96,7 @@ public class Files implements Serializable{
     }
 
     public Long getId() {
-        return id;
+        return fileId;
     }
 
     public String getName() {
@@ -117,7 +117,7 @@ public class Files implements Serializable{
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.fileId = id;
     }
 
     public void setName(String name) {
