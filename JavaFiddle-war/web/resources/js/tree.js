@@ -26,6 +26,20 @@ function addChild(root, obj) {
     var divElem = $('<div></div>')
     divElem.appendTo(liElem)
     var spanElem = $('<span id = ' + obj.id + '> </span>');
+    spanElem.click(function(){
+        alert("Click on element, ID: "+this.id); // нужный ID    
+        var elementId = this.id;
+        
+        $.ajax({
+            type: 'GET', //тип запроса: get,post либо head
+            url: 'http://localhost:8080/JavaFiddle-war/webapi/profileTree/nodeId', //url адрес файла обработчика
+            data: {'id':elementId}, //параметры запроса
+            response: 'text',
+            success: function(data) {
+            }
+        });
+        
+    });
     spanElem.appendTo(divElem);
     var iElem = $('<i class="glyphicon glyphicon-list-alt"></i>');
     iElem.appendTo(spanElem);
@@ -42,16 +56,3 @@ function addChild(root, obj) {
     return liElem;
 }
 
-$(document).ready(function() {
-    jQuery("span").click(function() {
-        alert(this.id);
-        $.ajax({
-            type: 'GET', //тип запроса: get,post либо head
-            url: 'http://localhost:8080/JavaFiddle-war/webapi/profileTree/nodeId', //url адрес файла обработчика
-            data: {'id':this.id}, //параметры запроса
-            response: 'text',
-            success: function(data) {
-            }
-        });
-    })
-});
