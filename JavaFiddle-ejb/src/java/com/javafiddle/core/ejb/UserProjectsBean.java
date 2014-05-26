@@ -5,10 +5,12 @@ import com.javafiddle.core.jpa.Files;
 import com.javafiddle.core.jpa.Permissions;
 import com.javafiddle.core.jpa.User;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -16,13 +18,14 @@ import javax.persistence.PersistenceContext;
  *
  * @author Вадим
  */
-@Stateful
+@Stateful @Named
 public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
 
     @PersistenceContext
     private EntityManager em;
     private LinkedList<Element> projects;
 
+    @Override
     public void addElement(String name, String type, String hash, Long parentId, Long creatorId) {
         Files fl = new Files();
         fl.setDate(new Date());
@@ -38,28 +41,21 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
             em.persist(fl);
             Element newEl = new Element(fl.getId(), name, type, true, hash);
             projects.add(newEl);
-        }
-        else
-        {
-            List <Files> parentFile = em.createQuery("select u from Files u where u.id =:parId")
+        } else {
+            List<Files> parentFile = em.createQuery("select u from Files u where u.id =:parId")
                     .setParameter("parId", parentId).getResultList();
-            if (parentFile.size() == 1){
+            if (parentFile.size() == 1) {
                 fl.setParent(parentFile.get(0));
             }
             em.persist(fl);
             Element newEl = new Element(fl.getId(), name, type, true, hash);
-            for ( int i = 0; i < projects.size(); i++)
-            {
-                if ( projects.get(i).id == parentId )
-                {
+            for (int i = 0; i < projects.size(); i++) {
+                if (projects.get(i).id == parentId) {
                     projects.get(i).child.add(newEl);
                     break;
-                }
-                else
-                {
+                } else {
                     Element el = findElemById(parentId, projects.get(i));
-                    if ( el != null)
-                    {
+                    if (el != null) {
                         el.child.add(newEl);
                     }
                 }
@@ -68,19 +64,55 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
 //        Element newEl = new Element()
     }
 
-    public void deleteElement(Element el) {
+    private List<Files> getAllFiles() {
+        return em.createQuery("select u from Files u").getResultList();
+    }
 
+    private Files getFiles(Long id) {
+        for (Files f : getAllFiles()) {
+            if (f.getId().equals(id))
+                return f;
+            }
+        return null;
+        }
+    
+
+    private List<Files> getChildren(Files files) {
+        List<Files> result = new ArrayList<>();
+        for (Files f : getAllFiles()) {
+            if (f.getParent().equals(files)) {
+                result.add(f);
+                result.addAll(getChildren(f));
+            }
+        }
+
+        return result;
+    }
+
+    private void deleteFromDatabase2(Files file) {
+        em.remove(file);
+        //em.createQuery("DELETE FROM Files f WHERE f.id = :id").setParameter("id", id).getSingleResult();
+    }
+
+    @Override
+    public void deleteElementFromDatabase(Long id) {
+        Files files = getFiles(id);
+
+        for (Files f : getChildren(files)) {
+            deleteFromDatabase2(f);
+        }
+
+        deleteFromDatabase2(files);
     }
 
     private Element findElemById(Long idForSearch, Element curEl) {
-        for ( int i = 0; i < curEl.child.size(); i++)
-        {
-            if (curEl.child.get(i).id == idForSearch){
+        for (int i = 0; i < curEl.child.size(); i++) {
+            if (curEl.child.get(i).id == idForSearch) {
                 return curEl.child.get(i);
             }
-            if (curEl.child.get(i).type.equals("Folder")){
+            if (curEl.child.get(i).type.equals("Folder")) {
                 Element el = findElemById(idForSearch, curEl.child.get(i));
-                if ( el != null) {
+                if (el != null) {
                     return el;
                 }
             }

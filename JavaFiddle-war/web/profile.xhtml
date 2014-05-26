@@ -16,6 +16,42 @@
     </h:head>
 
     <h:body>
+        
+    <div class="modal fade" id="modal-newfile" tabindex="-1" role="dialog" aria-labelledby="modal-newfile-header" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Create new file/folder</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group" >
+                                        <label for="modal-newfile-filetype">File or folder:</label>
+                                        <h:selectOneMenu value="#{userProjectsBeanWeb.type}">
+                                            <f:selectItem itemValue="Folder" itemLabel="folder"/>
+                                            <f:selectItem itemValue="File" itemLabel="file"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="modal-newfile-filename">Name:</label>
+                                        <h:inputText id="modal-newfile-filename" value="#{userProjectsBeanWeb.nameFile}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <h:commandButton class="btn btn-primary" action="#{userProjectsBeanWeb.createFile}">Create</h:commandButton>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
         <div class="container">
             <h1>Java Fiddle <span class="label label-info">Profile</span></h1>
 
@@ -27,8 +63,10 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Create</a></li>
-                                    <li><a href="#">Delete</a></li>                                    
+                                    <h:form>
+                                        <li onclick='$("#modal-newfile").modal("show");'><a href="#">Create</a></li>
+                                    <h:commandLink value ="Delete" actionListener="#{userProjectsBeanWeb.delete}"></h:commandLink>                                
+                                    </h:form>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -91,3 +129,4 @@
         <script src="resources/js/bootstrap.min.js"></script>        
     </h:body>
 </html>
+
