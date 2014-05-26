@@ -17,4 +17,7 @@ import java.util.LinkedList;
 public interface UserProjectsBeanWebLocal extends Serializable {
     
     public LinkedList <Element> getList();
+    
+    public void setButtonId(Long id);
+    public Long getButtonId();
 }

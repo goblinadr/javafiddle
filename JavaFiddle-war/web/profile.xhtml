@@ -28,7 +28,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Create</a></li>
-                                    <li><a href="#">Delete</a></li>
+                                    <li><a href="#">Delete</a></li>                                    
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -56,12 +56,12 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <img src="resources/img/ava_example.jpg" alt="Avatar" class="img-rounded"/>
+                                    <img id="av" src="resources/img/ava_example.jpg" alt="Avatar" class="img-rounded"/>
                                 </div>
                                 <div class="col-xs-8">
-                                    <b>Username:</b> Vadim <br/>
-                                    <b>Projects:</b> 2 <br/>
-                                    <b>Files:</b> 4 <br/>
+                                    <b>Username: </b><h:outputText  value="#{loginBean.nickname}"></h:outputText> <br/>
+                                    <b>Number of projects: </b> <h:outputText id="numProjects"> </h:outputText> <br/>
+                                    <span id="111">Myspan</span>
                                 </div>
                             </div>
                         </div>

@@ -14,13 +14,23 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
 
     @Inject
     private UserProjectsBeanLocal upbl;
-    
+
     @Inject
     private LoginBean lb;
 
-    public LinkedList <Element> getList() {
+    private Long pressedButtonId;
+
+    public LinkedList<Element> getList() {
         Long userId = lb.getId();
         return upbl.getProjects(userId);
+    }
+
+    public void setButtonId(Long id) {
+        pressedButtonId = id;
+    }
+    
+    public Long getButtonId(){
+        return pressedButtonId;
     }
 
 }
