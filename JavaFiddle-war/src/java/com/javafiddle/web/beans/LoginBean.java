@@ -46,7 +46,7 @@ public class LoginBean implements Serializable{
             if (this.user != null){               
               FacesContext fc = FacesContext.getCurrentInstance();
   NavigationHandler nh = fc.getApplication().getNavigationHandler();
-  nh.handleNavigation(fc, null, "profile");   
+  nh.handleNavigation(fc, null, "profile?faces-redirect=true");   
             //context.addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "GOOOD", "good"));
             }
             else    context.addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, "incorrect username or password", "incorrect username or password"));
