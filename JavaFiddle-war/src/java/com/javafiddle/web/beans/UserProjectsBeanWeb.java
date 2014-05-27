@@ -22,6 +22,12 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
     private LoginBean lb;
 
     private Long pressedButtonId;
+    
+    @Override
+    public void share() {
+        //Todo
+        
+    }
 
     @Override
     public LinkedList<Element> getList() {
@@ -65,6 +71,7 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
         System.out.println("Call create file: "+ nameFile+" type: "+type);
         upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
     }
+    
 
     public UserProjectsBeanLocal getUpbl() {
         return upbl;

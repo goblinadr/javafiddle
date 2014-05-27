@@ -23,7 +23,22 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
     @PersistenceContext
     private EntityManager em;
     private LinkedList<Element> projects;
-
+    
+    @Override
+    public void shareElement(Long fileId, Long userId ){
+        List<User> user = em.createQuery("select u from User u where u.id =:UsId").setParameter("UsId", userId).getResultList();
+        List<Files> fil = em.createQuery("select u from Files u where u.id =:fId").setParameter("fId", fileId).getResultList();
+        Permissions pers = new Permissions();
+        if (user.size() == 1 && fil.size() == 1)
+        {
+            pers.setFile(fil.get(0));
+            pers.setUser(user.get(0));
+            pers.setPermission("Edit");
+            em.persist(pers);
+        }
+        
+    }
+    
     @Override
     public void addElement(String name, String type, String hash, Long parentId, Long creatorId) {
         Files fl = new Files();
@@ -74,8 +89,6 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
             }
         return null;
         }
-    
-
     private List<Files> getChildren(Files files) {
         List<Files> result = new ArrayList<>();
         for (Files f : getAllFiles()) {
@@ -87,7 +100,6 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
 
         return result;
     }
-
     private void deleteFromDatabase2(Files file) {
         em.remove(file);
         //em.createQuery("DELETE FROM Files f WHERE f.id = :id").setParameter("id", id).getSingleResult();

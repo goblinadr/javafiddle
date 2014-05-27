@@ -20,6 +20,8 @@ public interface UserProjectsBeanWebLocal extends Serializable {
     public void delete();
 
     public void createFile();
+    
+    public void share();
 
     public void setButtonId(Long id);
 
