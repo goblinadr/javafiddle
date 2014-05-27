@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.Stateful;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,7 +17,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author Вадим
  */
-@Stateful @Named
+@Stateful 
 public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
 
     @PersistenceContext
@@ -42,7 +41,7 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
             Element newEl = new Element(fl.getId(), name, type, true, hash);
             projects.add(newEl);
         } else {
-            List<Files> parentFile = em.createQuery("select u from Files u where u.id =:parId")
+            List<Files> parentFile = em.createQuery("select u from Files u where u.fileId =:parId")
                     .setParameter("parId", parentId).getResultList();
             if (parentFile.size() == 1) {
                 fl.setParent(parentFile.get(0));
@@ -80,7 +79,7 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
     private List<Files> getChildren(Files files) {
         List<Files> result = new ArrayList<>();
         for (Files f : getAllFiles()) {
-            if (f.getParent().equals(files)) {
+            if (f.getParent() != null && f.getParent().equals(files)) {
                 result.add(f);
                 result.addAll(getChildren(f));
             }

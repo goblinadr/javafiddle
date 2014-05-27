@@ -47,6 +47,7 @@ public class ProfileTreeWS {
     public Response setNode(@Context HttpServletRequest request) {
         try {
             Long id = Long.parseLong(request.getParameter("id"));
+            System.out.println("Click on tree node: "+id);
             upwb.setButtonId(id);
         } catch (NumberFormatException e) {
         }

@@ -27,7 +27,7 @@ function addChild(root, obj) {
     divElem.appendTo(liElem)
     var spanElem = $('<span id = ' + obj.id + '> </span>');
     spanElem.click(function(){
-        alert("Click on element, ID: "+this.id); // нужный ID    
+       // alert("Click on element, ID: "+this.id); // нужный ID    
         var elementId = this.id;
         
         $.ajax({

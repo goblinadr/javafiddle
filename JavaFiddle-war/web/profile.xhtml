@@ -19,6 +19,7 @@
         
     <div class="modal fade" id="modal-newfile" tabindex="-1" role="dialog" aria-labelledby="modal-newfile-header" aria-hidden="true">
                 <div class="modal-dialog">
+                    <h:form prependId="false">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -30,7 +31,7 @@
                                     <div class="form-group" >
                                         <label for="modal-newfile-filetype">File or folder:</label>
                                         <h:selectOneMenu value="#{userProjectsBeanWeb.type}">
-                                            <f:selectItem itemValue="Folder" itemLabel="folder"/>
+                                            <f:selectItem itemValue="Project" itemLabel="Project"/>
                                             <f:selectItem itemValue="File" itemLabel="file"/>
                                         </h:selectOneMenu>
                                     </div>
@@ -45,9 +46,10 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <h:commandButton class="btn btn-primary" action="#{userProjectsBeanWeb.createFile}">Create</h:commandButton>
+                            <h:commandButton class="btn btn-primary" actionListener="#{userProjectsBeanWeb.createFile}"  value="Create" />
                         </div>
                     </div><!-- /.modal-content -->
+                    </h:form>
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
 
@@ -56,19 +58,21 @@
             <h1>Java Fiddle <span class="label label-info">Profile</span></h1>
 
             <br/>
+            <h:form prependId="false">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbar-1">
                         <ul class="nav navbar-nav">
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <h:form>
+                                <ul class="dropdown-menu">                                    
                                         <li onclick='$("#modal-newfile").modal("show");'><a href="#">Create</a></li>
-                                    <h:commandLink value ="Delete" actionListener="#{userProjectsBeanWeb.delete}"></h:commandLink>                                
-                                    </h:form>
+                                        <li> <h:commandLink value ="Delete" actionListener="#{userProjectsBeanWeb.delete}"></h:commandLink></li>                                
+                                    
                                 </ul>
                             </li>
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Share<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -83,6 +87,7 @@
                     </div>
                 </div>
             </nav>
+            </h:form>
             <div class="row">
                 <div class="col-xs-5">
                     <div class="tree well" id="rootTree">
