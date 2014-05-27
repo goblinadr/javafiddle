@@ -68,10 +68,12 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
     
     @Override
     public void createFile(){
-        System.out.println("Call create file: "+ nameFile+" type: "+type);
-        upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
+        if (nameFile != null){
+            System.out.println("Call create file: "+ nameFile+" type: "+type);
+            upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
+        }
+        nameFile = null;
     }
-    
 
     public UserProjectsBeanLocal getUpbl() {
         return upbl;
