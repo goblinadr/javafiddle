@@ -75,7 +75,6 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
             upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
         }
         nameFile = null;
-<<<<<<< HEAD
     }
 
     public String getNicknameForSharing() {
@@ -84,8 +83,6 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
 
     public void setNicknameForSharing(String nicknameForSharing) {
         this.nicknameForSharing = nicknameForSharing;
-=======
->>>>>>> e726769b7dabb21379a5355143bbc1aec8b553fc
     }
 
     public UserProjectsBeanLocal getUpbl() {
