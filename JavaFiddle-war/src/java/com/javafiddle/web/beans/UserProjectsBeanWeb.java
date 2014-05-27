@@ -63,7 +63,7 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
     @Override
     public void createFile(){
         System.out.println("Call create file: "+ nameFile+" type: "+type);
-        upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), new Long(120), lb.getId());
+        upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
     }
 
     public UserProjectsBeanLocal getUpbl() {
@@ -121,4 +121,8 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
         if(pressedButtonId != null)
           upbl.deleteElementFromDatabase(pressedButtonId); //upbw.getButtonId() - это должно быть вместо константы
     }
+    
+    /*public String getParent(){
+        return pressedButtonId.toString();
+    }*/
 }

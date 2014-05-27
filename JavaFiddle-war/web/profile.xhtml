@@ -32,7 +32,8 @@
                                         <label for="modal-newfile-filetype">File or folder:</label>
                                         <h:selectOneMenu value="#{userProjectsBeanWeb.type}">
                                             <f:selectItem itemValue="Project" itemLabel="Project"/>
-                                            <f:selectItem itemValue="File" itemLabel="file"/>
+                                            <f:selectItem itemValue="Folder" itemLabel="Folder" />
+                                            <f:selectItem itemValue="File" itemLabel="File"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
@@ -46,7 +47,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <h:commandButton class="btn btn-primary" actionListener="#{userProjectsBeanWeb.createFile}"  value="Create" />
+                            <h:commandLink class="btn btn-primary" actionListener="#{userProjectsBeanWeb.createFile}"  value="Create" />
                         </div>
                     </div><!-- /.modal-content -->
                     </h:form>
