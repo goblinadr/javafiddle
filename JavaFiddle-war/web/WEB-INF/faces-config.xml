@@ -8,13 +8,16 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>elementDeleteBean</managed-bean-name>
+        <managed-bean-class>com.javafiddle.web.beans.ElementDeleteBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+    <managed-bean>
         <managed-bean-name>loginBean</managed-bean-name>
         <managed-bean-class>com.javafiddle.web.beans.LoginBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>userProjectsBean</managed-bean-name>
-        <managed-bean-class>com.javafiddle.web.beans.UserProjectsBeanWeb</managed-bean-class>
-    
+        <managed-bean-class>com.javafiddle.web.beans.UserProjectsBeanWeb</managed-bean-class>   
         <managed-bean-scope>session</managed-bean-scope></managed-bean>
 </faces-config>

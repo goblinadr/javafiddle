@@ -9,4 +9,7 @@ import javax.ejb.Local;
 @Local
 public interface UserProjectsBeanLocal  {
     public LinkedList <  Element > getProjects(Long userId);
+    public void addElement(String name, String type, String hash, Long parentId, Long creatorId);
+    public void deleteElementFromDatabase(Long id);
+            
 }
