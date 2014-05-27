@@ -25,8 +25,9 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
     
     @Override
     public void share() {
-        //Todo
-        
+        if ( (nicknameForSharing != null) && (pressedButtonId != null))
+            upbl.shareElement(pressedButtonId, nicknameForSharing);
+        nicknameForSharing = null;
     }
 
     @Override
@@ -64,12 +65,24 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
     
     private String type;
     private String nameFile;
+    private String nicknameForSharing;
     
     
-    @Override
+     @Override
     public void createFile(){
-        System.out.println("Call create file: "+ nameFile+" type: "+type);
-        upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
+        if (nameFile != null){
+            System.out.println("Call create file: "+ nameFile+" type: "+type);
+            upbl.addElement(nameFile, type, getHash(nameFile + new Long(new Date().getTime()).toString()), pressedButtonId, lb.getId());
+        }
+        nameFile = null;
+    }
+
+    public String getNicknameForSharing() {
+        return nicknameForSharing;
+    }
+
+    public void setNicknameForSharing(String nicknameForSharing) {
+        this.nicknameForSharing = nicknameForSharing;
     }
     
 

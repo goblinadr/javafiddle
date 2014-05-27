@@ -25,13 +25,13 @@ public class UserProjectsBean implements UserProjectsBeanLocal, Serializable {
     private LinkedList<Element> projects;
     
     @Override
-    public void shareElement(Long fileId, Long userId ){
-        List<User> user = em.createQuery("select u from User u where u.id =:UsId").setParameter("UsId", userId).getResultList();
-        List<Files> fil = em.createQuery("select u from Files u where u.id =:fId").setParameter("fId", fileId).getResultList();
+    public void shareElement(Long fileId, String nickname ){
+        List<User> user = em.createQuery("select u from User u where u.nickname =:nk").setParameter("nk", nickname).getResultList();
+        Files fil = em.find(Files.class, fileId);
         Permissions pers = new Permissions();
-        if (user.size() == 1 && fil.size() == 1)
+        if (user.size() == 1 && fil != null)
         {
-            pers.setFile(fil.get(0));
+            pers.setFile(fil);
             pers.setUser(user.get(0));
             pers.setPermission("Edit");
             em.persist(pers);

@@ -17,9 +17,36 @@
 
     <h:body>
         
-    <div class="modal fade" id="modal-newfile" tabindex="-1" role="dialog" aria-labelledby="modal-newfile-header" aria-hidden="true">
-                <div class="modal-dialog">
-                    <h:form prependId="false">
+        <div class="modal fade" id="modal-share" tabindex="-1" role="dialog" aria-labelledby="modal-newfile-header" aria-hidden="true">
+            <div class="modal-dialog">
+                <h:form prependId="false">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Share for other user</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="modal-share-nickname">User's nickname:</label>
+                                        <h:inputText id="modal-share-nickname" value="#{userProjectsBeanWeb.nicknameForSharing}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <h:commandLink class="btn btn-primary" actionListener="#{userProjectsBeanWeb.share}"  value="Create" />
+                        </div>
+                    </div><!-- /.modal-content -->
+                </h:form>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade" id="modal-newfile" tabindex="-1" role="dialog" aria-labelledby="modal-newfile-header" aria-hidden="true">
+            <div class="modal-dialog">
+                <h:form prependId="false">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -50,9 +77,9 @@
                             <h:commandLink class="btn btn-primary" actionListener="#{userProjectsBeanWeb.createFile}"  value="Create" />
                         </div>
                     </div><!-- /.modal-content -->
-                    </h:form>
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                </h:form>
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
 
         <div class="container">
@@ -60,34 +87,27 @@
 
             <br/>
             <h:form prependId="false">
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="navbar-1">
-                        <ul class="nav navbar-nav">
-                            
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
-                                <ul class="dropdown-menu">                                    
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbar-1">
+                            <ul class="nav navbar-nav">
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">                                    
                                         <li onclick='$("#modal-newfile").modal("show");'><a href="#">Create</a></li>
                                         <li> <h:commandLink value ="Delete" actionListener="#{userProjectsBeanWeb.delete}"></h:commandLink></li>                                
-                                    
-                                </ul>
-                            </li>
-                            
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Share<b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Share file</a></li>
-                                    <li><a href="#">Share project</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Sign out</a></li>
-                        </ul>
+
+                                    </ul>
+                                </li>
+                                <li onclick='$("#modal-share").modal("show");'><a href="#">Share</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Sign out</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
             </h:form>
             <div class="row">
                 <div class="col-xs-5">
@@ -109,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
             </div>
