@@ -87,6 +87,7 @@ public class UserProjectsBeanWeb implements UserProjectsBeanWebLocal {
     }
 
     public void setPressedButtonId(Long pressedButtonId) {
+        System.out.println(pressedButtonId);
         this.pressedButtonId = pressedButtonId;
     }
 
