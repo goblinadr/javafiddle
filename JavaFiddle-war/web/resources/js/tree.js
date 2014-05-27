@@ -43,7 +43,7 @@ function addChild(root, obj) {
     spanElem.appendTo(divElem);
     var iElem = $('<i class="glyphicon glyphicon-list-alt"></i>');
     iElem.appendTo(spanElem);
-    spanElem.append(document.createTextNode(obj.name));
+    spanElem.append(document.createTextNode(" " + obj.name));
     if (((obj.type == "Folder") || (obj.type == "Project")) && obj.child.length > 0) {
         var ulElem = $('<ul></ul>');
         ulElem.appendTo(liElem);
